@@ -13,7 +13,7 @@ namespace ProductCatalog
 {
     public partial class AddProduct : Form
     {
-        string imagePath = string.Empty;
+        string WayToPic = "Pictures\\";
         public event EventHandler<DataEventArgs> DataTransferEvent;
         public AddProduct()
         {
@@ -51,11 +51,11 @@ namespace ProductCatalog
                     Price = Price,
                     ProduceProduct = Producer,
                     Count = int.Parse(CountBox.Text),
-                    Image = imagePath
+                    Image = WayToPic
                 });
                 db.SaveChanges();
 
-                DataEventArgs dataEventArgs = new DataEventArgs(Name, Description, Producer, Price, int.Parse(CountBox.Text), imagePath);
+                DataEventArgs dataEventArgs = new DataEventArgs(Name, Description, Producer, Price, int.Parse(CountBox.Text), WayToPic);
 
                 DataTransferEvent?.Invoke(this, dataEventArgs);
                 NameBox.Text = DescriptionBox.Text = ProducerBox.Text = PriceBox.Text = CountBox.Text = null;
@@ -77,15 +77,12 @@ namespace ProductCatalog
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    imagePath = openFileDialog.FileName;
                     string imageName = Path.GetFileName(openFileDialog.FileName);
-
                     string projectDirectory = Directory.GetCurrentDirectory() + "\\Pictures";
-
                     string destinationPath = Path.Combine(projectDirectory, imageName);
-                    File.Copy(imagePath, destinationPath, true);
-
-                    PictureBoxAdd.Image = Image.FromFile("Pictures\\"+ imageName);
+                    WayToPic = projectDirectory + "\\" + imageName;
+                    File.Copy(imageName, destinationPath, true);
+                    PictureBoxAdd.Image = Image.FromFile(destinationPath);
                 }
             }
 
