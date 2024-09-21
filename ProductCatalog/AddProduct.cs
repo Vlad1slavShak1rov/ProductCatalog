@@ -77,11 +77,12 @@ namespace ProductCatalog
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    string imagePath = openFileDialog.FileName;
                     string imageName = Path.GetFileName(openFileDialog.FileName);
                     string projectDirectory = Directory.GetCurrentDirectory() + "\\Pictures";
                     string destinationPath = Path.Combine(projectDirectory, imageName);
                     WayToPic = projectDirectory + "\\" + imageName;
-                    File.Copy(imageName, destinationPath, true);
+                    File.Copy(imagePath, destinationPath, true);
                     PictureBoxAdd.Image = Image.FromFile(destinationPath);
                 }
             }
