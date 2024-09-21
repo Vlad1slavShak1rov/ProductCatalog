@@ -102,11 +102,11 @@ namespace ProductCatalog
             return table;
         }
 
-        private void Seacrh()
+        private void CheckFilterAndSort()
         {
             string query = SearchBox.Text.ToLower();
 
-            if (query == string.Empty)
+            if (query == string.Empty && SortComboBox.Items[0] == SortComboBox.Text)
             {
                 PanelProduct.Controls.Clear();
                 InitData(); return;
@@ -115,12 +115,10 @@ namespace ProductCatalog
 
             int current_counter = 0;
 
-            if (!string.IsNullOrEmpty(query))
+            if (!string.IsNullOrEmpty(query) || SortComboBox.Items[0] != SortComboBox.Text)
             {
-                using (var productDataBase = new ProductDataBase())
-                {
                     PanelProduct.Controls.Clear();
-                    var prods = productDataBase.products.ToList();
+                    var prods = Sort();
 
                     List<Product> filteredProducts = new List<Product>();
 
@@ -144,7 +142,7 @@ namespace ProductCatalog
                     }
 
                     label3.Text = $"Загружено {current_counter} из {TotalData}";
-                }
+                
 
             }
 
@@ -168,30 +166,30 @@ namespace ProductCatalog
                 }
                 else if (SortComboBox.Text == SortComboBox.Items[1].ToString())
                 {
-                    return productDataBase.products.OrderBy(p => p.NameProduct).ToList(); // Сортировка по имени (возрастание)
+                    return productDataBase.products.OrderBy(p => p.NameProduct).ToList(); 
                 }
                 else if (SortComboBox.Text == SortComboBox.Items[2].ToString())
                 {
-                    return productDataBase.products.OrderByDescending(p => p.NameProduct).ToList(); // Сортировка по имени (убывание)
+                    return productDataBase.products.OrderByDescending(p => p.NameProduct).ToList(); 
                 }
                 else
                 {
-                    return productDataBase.products.ToList(); // Возвращаем несортированный список по умолчанию
+                    return productDataBase.products.ToList(); 
                 }
             }
         }
+
+        
         private void SortProduct(object sender, EventArgs e)
         {
-            var list = Sort();
-            PanelProduct.Controls.Clear();
-            foreach (var item in list)
-                PanelProduct.Controls.Add(CreateProductTable(item));
+            CheckFilterAndSort();
         }
-        private void CheckSearchBox(object sender, KeyEventArgs e) => Seacrh();
-            private void KeyPressCombox(object sender, KeyPressEventArgs e) => e.Handled = true;
-       
-            private void Add_Product_Click(object sender, EventArgs e) => product.ShowDialog();
+
+
+        private void CheckSearchBox(object sender, KeyEventArgs e) => CheckFilterAndSort();
+        private void KeyPressCombox(object sender, KeyPressEventArgs e) => e.Handled = true;
+
+        private void Add_Product_Click(object sender, EventArgs e) => product.ShowDialog();
 
     }
 }
-
