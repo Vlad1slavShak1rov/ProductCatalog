@@ -40,6 +40,7 @@
             SortComboBox = new ComboBox();
             label5 = new Label();
             label6 = new Label();
+            ExitButton = new Button();
             SuspendLayout();
             // 
             // PanelProduct
@@ -105,7 +106,7 @@
             // 
             hello.AutoSize = true;
             hello.Font = new Font("Segoe UI", 10F);
-            hello.Location = new Point(703, 10);
+            hello.Location = new Point(349, 142);
             hello.Name = "hello";
             hello.Size = new Size(47, 23);
             hello.TabIndex = 7;
@@ -157,11 +158,23 @@
             label6.TabIndex = 12;
             label6.Text = "Сортировка по названию";
             // 
+            // ExitButton
+            // 
+            ExitButton.Font = new Font("Segoe UI", 14F);
+            ExitButton.Location = new Point(807, 8);
+            ExitButton.Name = "ExitButton";
+            ExitButton.Size = new Size(96, 40);
+            ExitButton.TabIndex = 13;
+            ExitButton.Text = "Выйти";
+            ExitButton.UseVisualStyleBackColor = true;
+            ExitButton.Click += ExitClick;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(905, 607);
+            Controls.Add(ExitButton);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(SortComboBox);
@@ -195,5 +208,6 @@
         private ComboBox SortComboBox;
         private Label label5;
         private Label label6;
+        private Button ExitButton;
     }
 }

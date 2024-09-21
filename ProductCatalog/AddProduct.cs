@@ -97,7 +97,7 @@ namespace ProductCatalog
                 Product productData = null;
                 foreach (var product in products)
                 {
-                    if(product.NameProduct.ToLower() == NameProduct.ToLower() && 
+                    if (product.NameProduct.ToLower() == NameProduct.ToLower() &&
                         product.ProduceProduct.ToLower() == Produce.ToLower())
                     {
                         productData = product;
@@ -135,8 +135,6 @@ namespace ProductCatalog
                 }
             }
         }
-
-
     }
 
 

@@ -98,7 +98,7 @@ namespace ProductCatalog
                         Image.FromFile(product.Image)
             };
             if (table.CountProduct == "0 шт.") table.BackColor = Color.Gray;
-            else table.BackColor = Color.DarkBlue;
+            else table.BackColor = Color.LightSkyBlue;
             return table;
         }
 
@@ -117,32 +117,32 @@ namespace ProductCatalog
 
             if (!string.IsNullOrEmpty(query) || SortComboBox.Items[0] != SortComboBox.Text)
             {
-                    PanelProduct.Controls.Clear();
-                    var prods = Sort();
+                PanelProduct.Controls.Clear();
+                var prods = Sort();
 
-                    List<Product> filteredProducts = new List<Product>();
+                List<Product> filteredProducts = new List<Product>();
 
-                    foreach (var product in prods)
+                foreach (var product in prods)
+                {
+                    bool matchesName = product.NameProduct.ToLower().StartsWith(query);
+
+                    if ((matchesName && product.ProduceProduct.Contains(ComboBoxProduce.Text)) ||
+                        (ComboBoxProduce.Text == "Все производители" && matchesName))
                     {
-                        bool matchesName = product.NameProduct.ToLower().StartsWith(query);
-
-                        if ((matchesName && product.ProduceProduct.Contains(ComboBoxProduce.Text)) ||
-                            (ComboBoxProduce.Text == "Все производители" && matchesName))
-                        {
-                            filteredProducts.Add(product);
-                        }
+                        filteredProducts.Add(product);
                     }
+                }
 
 
-                    foreach (var product in filteredProducts)
-                    {
-                        current_counter++;
-                        var table = CreateProductTable(product);
-                        PanelProduct.Controls.Add(table);
-                    }
+                foreach (var product in filteredProducts)
+                {
+                    current_counter++;
+                    var table = CreateProductTable(product);
+                    PanelProduct.Controls.Add(table);
+                }
 
-                    label3.Text = $"Загружено {current_counter} из {TotalData}";
-                
+                label3.Text = $"Загружено {current_counter} из {TotalData}";
+
 
             }
 
@@ -166,20 +166,20 @@ namespace ProductCatalog
                 }
                 else if (SortComboBox.Text == SortComboBox.Items[1].ToString())
                 {
-                    return productDataBase.products.OrderBy(p => p.NameProduct).ToList(); 
+                    return productDataBase.products.OrderBy(p => p.NameProduct).ToList();
                 }
                 else if (SortComboBox.Text == SortComboBox.Items[2].ToString())
                 {
-                    return productDataBase.products.OrderByDescending(p => p.NameProduct).ToList(); 
+                    return productDataBase.products.OrderByDescending(p => p.NameProduct).ToList();
                 }
                 else
                 {
-                    return productDataBase.products.ToList(); 
+                    return productDataBase.products.ToList();
                 }
             }
         }
 
-        
+
         private void SortProduct(object sender, EventArgs e)
         {
             CheckFilterAndSort();
@@ -191,5 +191,10 @@ namespace ProductCatalog
 
         private void Add_Product_Click(object sender, EventArgs e) => product.ShowDialog();
 
+        private void ExitClick(object sender, EventArgs e)
+        {
+            this.Close();
+            (new EnterToProgramm()).Show();
+        }
     }
 }
