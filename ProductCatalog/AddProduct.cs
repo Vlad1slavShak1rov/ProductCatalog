@@ -78,9 +78,17 @@ namespace ProductCatalog
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     imagePath = openFileDialog.FileName;
-                    PictureBoxAdd.Image = Image.FromFile(imagePath);
+                    string imageName = Path.GetFileName(openFileDialog.FileName);
+
+                    string projectDirectory = Directory.GetCurrentDirectory() + "\\Pictures";
+
+                    string destinationPath = Path.Combine(projectDirectory, imageName);
+                    File.Copy(imagePath, destinationPath, true);
+
+                    PictureBoxAdd.Image = Image.FromFile("Pictures\\"+ imageName);
                 }
             }
+
         }
 
         private bool CheckDataBase(string NameProduct, string Produce)
