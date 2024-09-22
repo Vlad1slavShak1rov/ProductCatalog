@@ -16,6 +16,7 @@ namespace ProductCatalog
             InitializeComponent();
             InitData();
             ComboBoxProduce.Text = "Все производители";
+            SortComboBox.Text = "Не сортировать";
             hello.Text = $"Приветствую, {login}";
             product.DataTransferEvent += AddProductEvent;
         }
