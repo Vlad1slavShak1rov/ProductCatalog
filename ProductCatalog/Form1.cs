@@ -1,4 +1,4 @@
-using CatalogProduct;
+п»їusing CatalogProduct;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.VisualBasic.Logging;
 using System.Diagnostics.Metrics;
@@ -15,9 +15,9 @@ namespace ProductCatalog
         {
             InitializeComponent();
             InitData();
-            ComboBoxProduce.Text = "Все производители";
-            SortComboBox.Text = "Не сортировать";
-            hello.Text = $"Приветствую, {login}";
+            ComboBoxProduce.Text = "Р’СЃРµ РїСЂРѕРёР·РІРѕРґРёС‚РµР»Рё";
+            SortComboBox.Text = "РќРµ СЃРѕСЂС‚РёСЂРѕРІР°С‚СЊ";
+            hello.Text = $"РџСЂРёРІРµС‚СЃС‚РІСѓСЋ, {login}";
             product.DataTransferEvent += AddProductEvent;
         }
         private void AddProductEvent(object sender, DataEventArgs e)
@@ -28,8 +28,8 @@ namespace ProductCatalog
             table.NameProduct = e.NameBox;
             table.DescriptionProduct = e.DescriptionBox;
             table.ProducerProduct = e.ProducerBox;
-            table.PriceProduct = e.PriceBox.ToString() + " $";
-            table.CountProduct = e.CountBox.ToString() + " шт.";
+            table.PriceProduct = e.PriceBox.ToString() + " в‚Ѕ";
+            table.CountProduct = e.CountBox.ToString() + " С€С‚.";
             if (e.ImagePath == string.Empty) table.Image = Image.FromFile("C:\\pic\\def_pic.png");
             else table.Image = Image.FromFile(e.ImagePath);
 
@@ -37,7 +37,7 @@ namespace ProductCatalog
             PanelProduct.Controls.Clear();
             InitData();
             TotalData = PanelProduct.Controls.Count;
-            label3.Text = $"Загружено {TotalData} из {TotalData}";
+            label3.Text = $"Р—Р°РіСЂСѓР¶РµРЅРѕ {TotalData} РёР· {TotalData}";
         }
 
 
@@ -57,7 +57,7 @@ namespace ProductCatalog
                 }
             }
             TotalData = PanelProduct.Controls.Count;
-            label3.Text = $"Загружено {TotalData} из {TotalData}";
+            label3.Text = $"Р—Р°РіСЂСѓР¶РµРЅРѕ {TotalData} РёР· {TotalData}";
         }
 
         private void UpdatePanel(object sender, EventArgs e) => Filtration();
@@ -69,7 +69,7 @@ namespace ProductCatalog
             using (var productDataBase = new ProductDataBase())
             {
                 PanelProduct.Controls.Clear();
-                if (ComboBoxProduce.Text == "Все производители")
+                if (ComboBoxProduce.Text == "Р’СЃРµ РїСЂРѕРёР·РІРѕРґРёС‚РµР»Рё")
                 {
                     InitData();
                     return;
@@ -85,7 +85,7 @@ namespace ProductCatalog
                     var table = CreateProductTable(product);
                     PanelProduct.Controls.Add(table);
                 }
-                label3.Text = $"Загружено {current_counter} из {TotalData}";
+                label3.Text = $"Р—Р°РіСЂСѓР¶РµРЅРѕ {current_counter} РёР· {TotalData}";
             }
         }
         private Tables CreateProductTable(Product product)
@@ -95,13 +95,13 @@ namespace ProductCatalog
                 NameProduct = product.NameProduct,
                 DescriptionProduct = product.Description,
                 ProducerProduct = product.ProduceProduct,
-                PriceProduct = product.Price.ToString() + " $",
-                CountProduct = product.Count.ToString() + " шт.",
+                PriceProduct = product.Price.ToString() + " в‚Ѕ",
+                CountProduct = product.Count.ToString() + " С€С‚.",
                 Image = string.IsNullOrEmpty(product.Image) ?
                         Image.FromFile("C:\\pic\\def_pic.png") :
                         Image.FromFile(product.Image)
             };
-            if (table.CountProduct == "0 шт.") table.BackColor = Color.Gray;
+            if (table.CountProduct == "0 С€С‚.") table.BackColor = Color.Gray;
             else table.BackColor = Color.LightSkyBlue;
             return table;
         }
@@ -131,7 +131,7 @@ namespace ProductCatalog
                     bool matchesName = product.NameProduct.ToLower().StartsWith(query);
 
                     if ((matchesName && product.ProduceProduct.Contains(ComboBoxProduce.Text)) ||
-                        (ComboBoxProduce.Text == "Все производители" && matchesName))
+                        (ComboBoxProduce.Text == "Р’СЃРµ РїСЂРѕРёР·РІРѕРґРёС‚РµР»Рё" && matchesName))
                     {
                         filteredProducts.Add(product);
                     }
@@ -145,7 +145,7 @@ namespace ProductCatalog
                     PanelProduct.Controls.Add(table);
                 }
 
-                label3.Text = $"Загружено {current_counter} из {TotalData}";
+                label3.Text = $"Р—Р°РіСЂСѓР¶РµРЅРѕ {current_counter} РёР· {TotalData}";
 
 
             }
