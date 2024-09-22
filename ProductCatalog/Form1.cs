@@ -1,5 +1,6 @@
 using CatalogProduct;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.VisualBasic.Logging;
 using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.Windows.Forms;
@@ -14,6 +15,7 @@ namespace ProductCatalog
         {
             InitializeComponent();
             InitData();
+            ComboBoxProduce.Text = "Все производители";
             hello.Text = $"Приветствую, {login}";
             product.DataTransferEvent += AddProductEvent;
         }
@@ -41,6 +43,7 @@ namespace ProductCatalog
 
         private void InitData()
         {
+
             using (var productDataBase = new ProductDataBase())
             {
                 var products = productDataBase.products.ToList();

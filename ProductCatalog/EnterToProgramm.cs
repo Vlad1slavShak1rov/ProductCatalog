@@ -31,7 +31,7 @@ namespace ProductCatalog
                 bool login = db.users.Any(u => u.Login == loginBox.Text);
                 if (pass && login)
                 {
-                    this.Close();
+                    this.Hide();
                     (new Form1(loginBox.Text)).ShowDialog();
                 }
                 else MessageBox.Show("Неправильно введен пароль и/или логин", "Внимание!", MessageBoxButtons.OK);
