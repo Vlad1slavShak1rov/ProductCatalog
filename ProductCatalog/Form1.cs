@@ -4,7 +4,7 @@ using Microsoft.VisualBasic.Logging;
 using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.Windows.Forms;
-
+using DataBase;
 namespace ProductCatalog
 {
     public partial class Form1 : Form

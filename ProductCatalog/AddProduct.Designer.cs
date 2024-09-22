@@ -36,12 +36,13 @@
             NameBox = new TextBox();
             DescriptionBox = new TextBox();
             ProducerBox = new TextBox();
-            PriceBox = new TextBox();
             CountBox = new TextBox();
             AddButton = new Button();
             PictureBoxAdd = new PictureBox();
             AddPicture = new Button();
+            PriceBox = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)PictureBoxAdd).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PriceBox).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -110,13 +111,6 @@
             ProducerBox.Size = new Size(180, 27);
             ProducerBox.TabIndex = 7;
             // 
-            // PriceBox
-            // 
-            PriceBox.Location = new Point(146, 135);
-            PriceBox.Name = "PriceBox";
-            PriceBox.Size = new Size(180, 27);
-            PriceBox.TabIndex = 8;
-            // 
             // CountBox
             // 
             CountBox.Location = new Point(215, 168);
@@ -154,16 +148,23 @@
             AddPicture.UseVisualStyleBackColor = true;
             AddPicture.Click += AddPicture_Click;
             // 
+            // PriceBox
+            // 
+            PriceBox.Location = new Point(146, 135);
+            PriceBox.Name = "PriceBox";
+            PriceBox.Size = new Size(180, 27);
+            PriceBox.TabIndex = 13;
+            // 
             // AddProduct
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(346, 450);
+            Controls.Add(PriceBox);
             Controls.Add(AddPicture);
             Controls.Add(PictureBoxAdd);
             Controls.Add(AddButton);
             Controls.Add(CountBox);
-            Controls.Add(PriceBox);
             Controls.Add(ProducerBox);
             Controls.Add(DescriptionBox);
             Controls.Add(NameBox);
@@ -178,6 +179,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Добавить товар";
             ((System.ComponentModel.ISupportInitialize)PictureBoxAdd).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PriceBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -192,10 +194,10 @@
         private TextBox NameBox;
         private TextBox DescriptionBox;
         private TextBox ProducerBox;
-        private TextBox PriceBox;
         private TextBox CountBox;
         private Button AddButton;
         private PictureBox PictureBoxAdd;
         private Button AddPicture;
+        private NumericUpDown PriceBox;
     }
 }

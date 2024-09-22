@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ProductCatalog
+namespace DataBase
 {
     internal class ProductDataBase : DbContext
     {
@@ -15,7 +15,7 @@ namespace ProductCatalog
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source = C:\\Users\\sakir\\source\\repos\\ProductCatalog\\ProductCatalog\\ProductDataBase.db");
+            optionsBuilder.UseSqlite("Data Source = C:\\Users\\sakir\\source\\repos\\ProductCatalog\\ProductCatalog\\DataBase\\ProductDataBase.db");
         }
     }
 }
