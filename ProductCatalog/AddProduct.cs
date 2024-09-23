@@ -15,6 +15,7 @@ namespace ProductCatalog
     public partial class AddProduct : Form
     {
         string WayToPic = "Pictures\\";
+        bool add_pic = false;
         public event EventHandler<DataEventArgs> DataTransferEvent;
         public AddProduct()
         {
@@ -55,8 +56,8 @@ namespace ProductCatalog
                     Image = WayToPic
                 });
                 db.SaveChanges();
-
-                DataEventArgs dataEventArgs = new DataEventArgs(Name, Description, Producer, Price, int.Parse(CountBox.Text), WayToPic);
+                string path_name = add_pic ? WayToPic : "Pictures\\default.jpg";
+                DataEventArgs dataEventArgs = new DataEventArgs(Name, Description, Producer, Price, int.Parse(CountBox.Text), path_name);
 
                 DataTransferEvent?.Invoke(this, dataEventArgs);
                 NameBox.Text = DescriptionBox.Text = ProducerBox.Text = PriceBox.Text = CountBox.Text = null;
@@ -82,9 +83,10 @@ namespace ProductCatalog
                     string imageName = Path.GetFileName(openFileDialog.FileName);
                     string projectDirectory = Directory.GetCurrentDirectory() + "\\Pictures";
                     string destinationPath = Path.Combine(projectDirectory, imageName);
-                    WayToPic = projectDirectory + "\\" + imageName;
+                    WayToPic = "Pictures\\" + imageName;
                     File.Copy(imagePath, destinationPath, true);
                     PictureBoxAdd.Image = Image.FromFile(destinationPath);
+                    add_pic = true;
                 }
             }
 

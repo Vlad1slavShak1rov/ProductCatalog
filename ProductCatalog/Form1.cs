@@ -98,7 +98,7 @@ namespace ProductCatalog
                 PriceProduct = product.Price.ToString() + " ₽",
                 CountProduct = product.Count.ToString() + " шт.",
                 Image = string.IsNullOrEmpty(product.Image) ?
-                        Image.FromFile("C:\\pic\\def_pic.png") :
+                        Image.FromFile("Pictures\\default.jpg") :
                         Image.FromFile(product.Image)
             };
             if (table.CountProduct == "0 шт.") table.BackColor = Color.Gray;
