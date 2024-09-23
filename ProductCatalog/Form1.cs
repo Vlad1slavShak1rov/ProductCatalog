@@ -164,17 +164,18 @@ namespace ProductCatalog
         {
             using (var productDataBase = new ProductDataBase())
             {
+
                 if (SortComboBox.Text == SortComboBox.Items[0].ToString())
                 {
                     return productDataBase.products.ToList();
                 }
                 else if (SortComboBox.Text == SortComboBox.Items[1].ToString())
                 {
-                    return productDataBase.products.OrderBy(p => p.NameProduct).ToList();
+                    return productDataBase.products.OrderBy(p => (double)p.Price).ToList();
                 }
                 else if (SortComboBox.Text == SortComboBox.Items[2].ToString())
                 {
-                    return productDataBase.products.OrderByDescending(p => p.NameProduct).ToList();
+                    return productDataBase.products.OrderByDescending(p => (double)p.Price).ToList();
                 }
                 else
                 {

@@ -46,6 +46,7 @@ namespace ProductCatalog
             if (!string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Description)
                 && !string.IsNullOrWhiteSpace(Producer) && CheckDataBase(Name, Producer))
             {
+                string path_name = add_pic ? WayToPic : "Pictures\\default.jpg";
                 db.products.Add(new Product
                 {
                     NameProduct = Name,
@@ -53,10 +54,10 @@ namespace ProductCatalog
                     Price = Price,
                     ProduceProduct = Producer,
                     Count = int.Parse(CountBox.Text),
-                    Image = WayToPic
+                    Image = path_name
                 });
                 db.SaveChanges();
-                string path_name = add_pic ? WayToPic : "Pictures\\default.jpg";
+              
                 DataEventArgs dataEventArgs = new DataEventArgs(Name, Description, Producer, Price, int.Parse(CountBox.Text), path_name);
 
                 DataTransferEvent?.Invoke(this, dataEventArgs);
